@@ -1,3 +1,4 @@
+mod year22;
 mod utils;
 use std::fs;
 
@@ -22,4 +23,11 @@ fn main() {
         Ok(file) => file,
         Err(_) => utils::download_input(args.year, args.day, cookie),
     };
+
+    let result = match args.year {
+        2022 => year22::solve(args.day, input_file),
+        _ => panic!("Year {} does not exist", args.year)
+    };
+
+    println!("Result for {}/{} is: Part1 {}, Part 2 {}", args.year, args.day, result.0, result.1)
 }
