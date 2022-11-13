@@ -21,3 +21,10 @@ pub fn download_input(year: u32, day: u32, cookie: &str) -> String {
     easy.perform().unwrap();
     fs::read_to_string(input_file_name(year, day)).expect("Could not read file after download")
 }
+
+pub fn parse_number_lines(input: String) -> Vec<i32> {
+    let parse = |x: &str| -> i32 {
+        x.parse::<i32>().expect("Parse error")
+    };
+    input.split("\n").filter(|x| !x.is_empty()).map(parse).collect()
+}
