@@ -3,22 +3,32 @@ use std::collections::HashSet;
 fn fold(v: usize, fold_at: usize) -> usize {
     if v > fold_at {
         return fold_at - (v - fold_at);
-    }   
+    }
     v
 }
 
-fn part1(input: String)  -> String {
+fn part1(input: String) -> String {
     let coordinates = input.split("\n").filter(|x| x.contains(","));
-    let instruction = input.split("\n").filter(|x| x.contains("fold")).collect::<Vec<&str>>()[0];
+    let instruction = input
+        .split("\n")
+        .filter(|x| x.contains("fold"))
+        .collect::<Vec<&str>>()[0];
     let mut grid = HashSet::new();
     for coord in coordinates {
-        let xy: Vec<usize> = coord.split(",").map(|x| x.parse::<usize>().unwrap()).collect();
+        let xy: Vec<usize> = coord
+            .split(",")
+            .map(|x| x.parse::<usize>().unwrap())
+            .collect();
         if instruction.contains("y=") {
-            let fold_at = instruction.split("y=").collect::<Vec<&str>>()[1].parse::<usize>().unwrap();
+            let fold_at = instruction.split("y=").collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap();
             grid.insert((xy[0], fold(xy[1], fold_at)));
         }
         if instruction.contains("x=") {
-            let fold_at = instruction.split("x=").collect::<Vec<&str>>()[1].parse::<usize>().unwrap();
+            let fold_at = instruction.split("x=").collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap();
             grid.insert((fold(xy[0], fold_at), xy[1]));
         }
     }
@@ -26,18 +36,16 @@ fn part1(input: String)  -> String {
 }
 
 fn print_grid(grid: &HashSet<(usize, usize)>) {
-
     for y in 0..6 {
         for x in 0..40 {
-           if grid.contains(&(x, y)) {
+            if grid.contains(&(x, y)) {
                 print!("#");
-           } else {
-            print!(".");
-          }
+            } else {
+                print!(".");
+            }
         }
         print!("\n");
     }
-
 }
 
 fn part2(input: String) -> String {
@@ -46,10 +54,17 @@ fn part2(input: String) -> String {
     let instruction = instructions[0];
     let mut grid = HashSet::new();
     for coord in coordinates {
-        let xy: Vec<usize> = coord.split(",").map(|x| x.parse::<usize>().unwrap()).collect();
+        let xy: Vec<usize> = coord
+            .split(",")
+            .map(|x| x.parse::<usize>().unwrap())
+            .collect();
         let fold_at = match instruction.contains("y=") {
-            true => instruction.split("y=").collect::<Vec<&str>>()[1].parse::<usize>().unwrap(),
-            false => instruction.split("x=").collect::<Vec<&str>>()[1].parse::<usize>().unwrap(),
+            true => instruction.split("y=").collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap(),
+            false => instruction.split("x=").collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap(),
         };
         if instruction.contains("y=") {
             grid.insert((xy[0], fold(xy[1], fold_at)));
@@ -63,8 +78,12 @@ fn part2(input: String) -> String {
     let mut new_coordinates = grid.clone();
     for instruction in instructions {
         let fold_at = match instruction.contains("y=") {
-            true => instruction.split("y=").collect::<Vec<&str>>()[1].parse::<usize>().unwrap(),
-            false => instruction.split("x=").collect::<Vec<&str>>()[1].parse::<usize>().unwrap(),
+            true => instruction.split("y=").collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap(),
+            false => instruction.split("x=").collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap(),
         };
 
         for coord in new_coordinates.iter() {

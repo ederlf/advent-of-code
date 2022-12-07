@@ -1,14 +1,13 @@
-
-
-fn part1(input: String)  -> String {
-    let positions: Vec<usize> = input.trim_end_matches(&['\r', '\n'][..])
+fn part1(input: String) -> String {
+    let positions: Vec<usize> = input
+        .trim_end_matches(&['\r', '\n'][..])
         .split(",")
-        .map(|x| x.parse::<usize>().unwrap()).collect();
+        .map(|x| x.parse::<usize>().unwrap())
+        .collect();
     let mut min_fuel = usize::MAX;
-    for pos in positions.iter(){
+    for pos in positions.iter() {
         let fuel = positions.iter().fold(0, |acc, x| acc + x.abs_diff(*pos));
-        min_fuel = if fuel < min_fuel {fuel} else {min_fuel};
-
+        min_fuel = if fuel < min_fuel { fuel } else { min_fuel };
     }
     min_fuel.to_string()
 }
@@ -18,14 +17,17 @@ fn natural_sum(v: usize) -> usize {
 }
 
 fn part2(input: String) -> String {
-    let positions: Vec<usize> = input.trim_end_matches(&['\r', '\n'][..])
+    let positions: Vec<usize> = input
+        .trim_end_matches(&['\r', '\n'][..])
         .split(",")
-        .map(|x| x.parse::<usize>().unwrap()).collect();
+        .map(|x| x.parse::<usize>().unwrap())
+        .collect();
     let mut min_fuel = usize::MAX;
-    for pos in 0..*positions.iter().max().unwrap(){
-        let fuel = positions.iter().fold(0, |acc, x| acc + natural_sum(x.abs_diff(pos)) )  ;
-        min_fuel = if fuel < min_fuel {fuel} else {min_fuel};
-
+    for pos in 0..*positions.iter().max().unwrap() {
+        let fuel = positions
+            .iter()
+            .fold(0, |acc, x| acc + natural_sum(x.abs_diff(pos)));
+        min_fuel = if fuel < min_fuel { fuel } else { min_fuel };
     }
     min_fuel.to_string()
 }

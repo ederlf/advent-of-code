@@ -6,15 +6,25 @@ fn parse_point(point: &str) -> (usize, usize) {
     (x1.parse::<usize>().unwrap(), y1.parse::<usize>().unwrap())
 }
 
-fn find_intersections(points: &mut HashMap<(usize, usize), usize>, p1: (usize, usize), p2: (usize, usize)) {
+fn find_intersections(
+    points: &mut HashMap<(usize, usize), usize>,
+    p1: (usize, usize),
+    p2: (usize, usize),
+) {
     let diff_x = p1.0 as i32 - p2.0 as i32;
     let diff_y = p1.1 as i32 - p2.1 as i32;
 
-    let diff = {if diff_x != 0 {diff_x} else {diff_y}};
+    let diff = {
+        if diff_x != 0 {
+            diff_x
+        } else {
+            diff_y
+        }
+    };
 
-    for i in 0..diff.abs() as usize + 1  {
+    for i in 0..diff.abs() as usize + 1 {
         let mut point = (0, 0);
-        if diff_x < 0 && diff_y < 0  {
+        if diff_x < 0 && diff_y < 0 {
             point = (p2.0 - i, p2.1 - i);
         } else if diff_x > 0 && diff_y < 0 {
             point = (p2.0 + i, p2.1 - i);
@@ -44,8 +54,11 @@ fn find_intersections(points: &mut HashMap<(usize, usize), usize>, p1: (usize, u
     }
 }
 
-fn part1(input: String)  -> String {
-    let coordinates = input.split("\n").filter(|x| !x.is_empty()).map(|x| x.split(" "));
+fn part1(input: String) -> String {
+    let coordinates = input
+        .split("\n")
+        .filter(|x| !x.is_empty())
+        .map(|x| x.split(" "));
     let mut points = HashMap::new();
     for coord in coordinates {
         let c = coord.collect::<Vec<_>>();
@@ -60,7 +73,10 @@ fn part1(input: String)  -> String {
 }
 
 fn part2(input: String) -> String {
-    let coordinates = input.split("\n").filter(|x| !x.is_empty()).map(|x| x.split(" "));
+    let coordinates = input
+        .split("\n")
+        .filter(|x| !x.is_empty())
+        .map(|x| x.split(" "));
     let mut points = HashMap::new();
     for coord in coordinates {
         let c = coord.collect::<Vec<_>>();

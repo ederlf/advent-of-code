@@ -1,18 +1,22 @@
 fn parse_elves(input: String) -> Vec<usize> {
-    input.lines().fold(Vec::new(), |mut acc, x| {
+    input
+        .lines()
+        .fold(Vec::new(), |mut acc, x| {
             if x == "" || acc.is_empty() {
                 acc.push(Vec::new());
-                return acc
+                return acc;
             }
             acc.last_mut().unwrap().push(x.parse::<usize>().unwrap());
             acc
-        }).iter()
-        .map(|x| x.iter().sum::<usize>()).collect()
+        })
+        .iter()
+        .map(|x| x.iter().sum::<usize>())
+        .collect()
 }
 
-fn part1(input: String)  -> String {
+fn part1(input: String) -> String {
     let elves = parse_elves(input);
-    let max: usize  = *elves.iter().max().unwrap();
+    let max: usize = *elves.iter().max().unwrap();
     max.to_string()
 }
 

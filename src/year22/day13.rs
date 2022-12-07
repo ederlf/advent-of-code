@@ -1,4 +1,4 @@
-fn part1(_input: String)  -> String {
+fn part1(_input: String) -> String {
     "Not implemented".to_string()
 }
 

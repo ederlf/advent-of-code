@@ -1,12 +1,4 @@
 mod day1;
-mod day2;
-mod day3;
-mod day4;
-mod day5;
-mod day6;
-mod day7;
-mod day8;
-mod day9;
 mod day10;
 mod day11;
 mod day12;
@@ -17,15 +9,23 @@ mod day16;
 mod day17;
 mod day18;
 mod day19;
+mod day2;
 mod day20;
 mod day21;
 mod day22;
 mod day23;
 mod day24;
 mod day25;
+mod day3;
+mod day4;
+mod day5;
+mod day6;
+mod day7;
+mod day8;
+mod day9;
 
 pub fn solve(day: u32, input: String) -> (String, String) {
-   let solution = match day {
+    let solution = match day {
         1 => day1::solve(input),
         2 => day2::solve(input),
         3 => day3::solve(input),

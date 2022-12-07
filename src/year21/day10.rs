@@ -31,7 +31,7 @@ fn closing_points(c: char) -> usize {
 // .0 corrupted, .1 completion
 fn points(input: &String) -> (usize, usize) {
     let matchings = define_matchings();
-    let lines =  input.split("\n").filter(|x| !x.is_empty());
+    let lines = input.split("\n").filter(|x| !x.is_empty());
     let mut corrupted = 0;
     let mut completion_scores = Vec::new();
     for line in lines {
@@ -46,8 +46,7 @@ fn points(input: &String) -> (usize, usize) {
                     corrupted += corrupted_points(c);
                     corrupt = true;
                     break;
-                }
-                else {
+                } else {
                     stack.pop();
                 }
             }
@@ -66,7 +65,7 @@ fn points(input: &String) -> (usize, usize) {
     (corrupted, completion_scores[idx])
 }
 
-fn part1(input: String)  -> String {
+fn part1(input: String) -> String {
     points(&input).0.to_string()
 }
 

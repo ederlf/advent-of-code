@@ -1,6 +1,6 @@
+mod utils;
 mod year21;
 mod year22;
-mod utils;
 use std::fs;
 
 use clap::Parser;
@@ -14,15 +14,15 @@ struct Cli {
     day: u32,
     /// Use a test input
     #[arg(short, long, default_value_t = false)]
-    test: bool
+    test: bool,
 }
-
 
 fn main() {
     let args = Cli::parse();
     let cookie = env!("AOC_SESSION_COOKIE");
 
-    let input_file_result = fs::read_to_string(utils::input_file_name(args.year, args.day, args.test));
+    let input_file_result =
+        fs::read_to_string(utils::input_file_name(args.year, args.day, args.test));
     let input_file = match input_file_result {
         Ok(file) => file,
         Err(_) => utils::download_input(args.year, args.day, cookie),
@@ -31,8 +31,11 @@ fn main() {
     let result = match args.year {
         2021 => year21::solve(args.day, input_file),
         2022 => year22::solve(args.day, input_file),
-        _ => panic!("Year {} does not exist", args.year)
+        _ => panic!("Year {} does not exist", args.year),
     };
 
-    println!("Result for {}/{} is: Part1 {}, Part 2 {}", args.year, args.day, result.0, result.1)
+    println!(
+        "Result for {}/{} is: Part1 {}, Part 2 {}",
+        args.year, args.day, result.0, result.1
+    )
 }

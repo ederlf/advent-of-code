@@ -1,12 +1,12 @@
 use std::str;
 
 fn operate_crane(input: String, part1: bool) -> String {
-    let stack_lines = input.lines().filter(|x| x.contains("["));
     let instructions = input
         .lines()
         .filter(|x| x.contains("move"))
         .collect::<Vec<&str>>();
 
+    let stack_lines = input.lines().filter(|x| x.contains("["));
     let mut stacks: Vec<Vec<&str>> = stack_lines.rev().fold(Vec::new(), |mut acc, s| {
         let elements: Vec<&str> = s
             .as_bytes()
