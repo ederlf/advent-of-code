@@ -39,7 +39,7 @@ fn create_board(board_spec: &[&str]) -> Board {
 
 fn check_board(board: &mut Board, value: u32) -> i32 {
     if board.values.contains_key(&value) {
-        let mut point = board.values.get_mut(&value).unwrap();
+        let point = board.values.get_mut(&value).unwrap();
         point.marked = true;
         board.rows[point.x as usize] += 1;
         board.columns[point.y as usize] += 1;

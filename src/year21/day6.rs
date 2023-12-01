@@ -16,7 +16,7 @@ fn part1(input: String) -> String {
         .collect();
     for _ in 0..80 {
         let mut new_fish = Vec::new();
-        for mut f in fish.iter_mut() {
+        for f in fish.iter_mut() {
             f.counter -= 1;
             if f.counter < 0 {
                 f.counter = 6;
