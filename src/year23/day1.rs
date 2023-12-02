@@ -1,33 +1,24 @@
 use std::collections::HashSet;
 
 fn line_number_only_digits(line: String) -> i32 {
-    let mut first = String::new();
-    let mut numbers = Vec::<i32>::new();
-    let mut has_second = false;
+    let mut numbers = Vec::<String>::new();
     for c in line.chars() {
         if c.is_digit(10) {
-            if first.is_empty() {
-                first = c.to_string();
-            } else {
-                let num = first.clone() + &c.to_string();
-                numbers.push(num.parse::<i32>().unwrap());
-                has_second = true;
-            }
+            numbers.push(c.to_string());
         }
     }
-    if first.is_empty() {
-        return 0;
-    }
 
-    if !has_second {
+    let first = numbers.first().unwrap();
+    let second = match numbers.last() {
+        Some(x) => x,
+        None => "",
+    };
+    if second.is_empty() {
         let res = (first.clone() + &first).parse::<i32>().unwrap();
         return res;
     }
 
-    let res = match numbers.last() {
-        Some(x) => *x,
-        None => 0,
-    };
+    let res = (first.clone() + &second).parse::<i32>().unwrap();
     res
 }
 
