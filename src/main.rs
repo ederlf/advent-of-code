@@ -1,4 +1,5 @@
 mod utils;
+mod year15;
 mod year21;
 mod year22;
 mod year23;
@@ -30,6 +31,7 @@ fn main() {
     };
 
     let result = match args.year {
+        2015 => year15::solve(args.day, input_file),
         2021 => year21::solve(args.day, input_file),
         2022 => year22::solve(args.day, input_file),
         2023 => year23::solve(args.day, input_file),
