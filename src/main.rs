@@ -3,6 +3,7 @@ mod year15;
 mod year21;
 mod year22;
 mod year23;
+mod year24;
 use std::fs;
 
 use clap::Parser;
@@ -35,6 +36,7 @@ fn main() {
         2021 => year21::solve(args.day, input_file),
         2022 => year22::solve(args.day, input_file),
         2023 => year23::solve(args.day, input_file),
+        2024 => year24::solve(args.day, input_file),
         _ => panic!("Year {} does not exist", args.year),
     };
 
